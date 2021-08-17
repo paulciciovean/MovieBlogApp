@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} DjangoApp-AddRating {% endblock%}
+{% block content%}
+    {% if user.is_authenticated %}
+    <h4 style="text-align: center">Here you can add your rating for : {{ movie.title }} </h4>
+    <div style="margin-top: 50px;" class="shadow p-3 mb-5 bg-white rounded">
+        <div class="row">
+            <div class="col">
+                <h4>{{ movie.title }} ( {{ movie.year }} )</h4>
+                <img src="{{ movie.image.url }}" width="200" height="300">
+            </div>
+            <div class="col">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                {{ form|crispy }}
+                 </fieldset>
+                <button type="submit" class="btn btn-primary">Add Rating</button>
+            </form>
+                </div>
+            </div>
+    </div>
+        {% else %}
+            <h1>You need to be logged in to see this page</h1>
+             <div class="border-top pt-3">
+                <small class="text-muted">
+                    Already have an account ? <a class="ml-2" href="/login">Login</a>
+                </small>
+            </div>
+            <div class="border-top pt-3">
+                <small class="text-muted">
+                    You don't have an account ? <a class="ml-2" href="/register">Register</a>
+                </small>
+            </div>
+    {% endif %}
+{% endblock %}

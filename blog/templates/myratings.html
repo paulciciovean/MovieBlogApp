@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} DjangoApp - MyRatings {% endblock %}
+
+{% block content%}
+        <br>
+        <a style="text-align: center; margin-bottom 15px;" class="btn btn-success" href="{% url 'myratings' user.id %}">My ratings : </a>
+        <br>
+        <br>
+        {% for rating in ratings %}
+        <div class="shadow p-3 mb-5 bg-white rounded">
+            <a href="{% url 'show-movie' rating.movie.id %}"> <h3>{{ rating.movie.title}}</h3> </a>
+                <div class="row">
+                    <div class="col">
+                        <img src="{{ rating.movie.image.url }}" width="100" height="200">
+                        <br>
+                        <br>
+                        <img src="{{ rating.star1.url }}" width="40" height="60">
+                        {{ rating.movie.mean_rating }}
+                    </div>
+                    <div class="col">
+                        <img src="{{ rating.star2.url }}" width="50" height="70">
+                        {{ rating.rating }}/10
+                        <br>
+                    </div>
+                    <div class="col">
+                        <a href="{% url 'update-rating' rating.id %}" class="btn btn-outline-info"> Update </a>
+                        <a href="{% url 'delete-rating' rating.id %}" class="btn btn-outline-danger"> Delete </a>
+                    </div>
+                </div>
+        </div>
+        {% endfor %}
+
+
+{% endblock %}

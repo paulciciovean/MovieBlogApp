@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} DjangoApp-AddActor {% endblock%}
+{% block content%}
+    {% if user.is_authenticated %}
+        {% if user.is_staff %}
+    <h1  style="text-align: center;">Add New Actor</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            {{ form|crispy }}
+            </fieldset>
+        <button type="submit" class="btn btn-primary">Add Actor</button>
+    </form>
+        {% endif %}
+    {% endif %}
+{% endblock %}

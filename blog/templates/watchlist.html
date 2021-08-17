@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Watchlist {% endblock %}
+
+{% block content%}
+
+        <a style="text-align: center; margin 15px;" class="btn btn-warning" href="/watchlist">My watchlist : </a>
+        {% for mw in movieswl %}
+            <div class="shadow p-3 mb-5 bg-white rounded">
+
+            <a href="{% url 'show-movie' mw.id %}"> <h2>{{ mw.title }} ( {{ mw.year }})</h2> </a>
+            <img src="{{ mw.image.url }}" width="200" height="300">
+            <small style="border: solid black 1px; border-radius: 3px" class="text-muted">{{ mw.category }}</small>
+            <p>{{ mw.content }}</p>
+            <a href="{% url 'remove-watchlist' mw.id %}" class="btn btn-danger">Remove from watchlist</a>
+            </div>
+        {% endfor %}
+{% endblock %}

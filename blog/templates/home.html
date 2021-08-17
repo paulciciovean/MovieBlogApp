@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Home {% endblock%}
+
+{% block content%}
+    <h3 style="text-align: center">Latest reviews for movies from our users : </h3>
+    {% for review in reviews %}
+    <div class="shadow p-3 mb-5 bg-white rounded">
+            <a href="{% url 'show-movie' review.movie.id %}"> <h3>{{ review.movie.title}}</h3> </a>
+                <div class="row">
+                    <div class="col">
+                        <img src="{{ review.movie.image.url }}" width="100" height="200">
+                         <small>{{ review.movie.mean_rating }}({{ review.movie.rating_count }}) </small>
+                    </div>
+                    <div class="col">
+                        <small class="text-muted">{{ review.user.username }} posted :</small>
+                        {{ review.context }}
+                        <br>
+                        <small style="color: blue;" >{{ review.date }}</small>
+                    </div>
+
+                </div>
+    </div>
+    {% endfor%}
+
+
+{% endblock %}
